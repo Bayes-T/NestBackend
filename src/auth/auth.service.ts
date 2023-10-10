@@ -49,12 +49,12 @@ async  login(loginDto: loginDto):Promise<loginResponse>{
     const user = await this.userModel.findOne({email:email})
 
     if(!user){
-      throw new UnauthorizedException('Not valid credentials')
+      throw new UnauthorizedException('Not valid credentials - No User')
     }
 
     //user es la constante que creé que es igual al objeto usuario que coincide con el email. Por lo tanto es el usuario que busco y con el que tengo que comparar la contraseña encriptada
     if(!bcryptjs.compareSync(password, user.password)){
-      throw new UnauthorizedException('Not valid credentials')
+      throw new UnauthorizedException('Not valid credentials - Password')
     }
 
     //user es una instancia de user model, que defini en el constructor como de tipo USER (la entidad, por eso tiene todas las propiedades)
