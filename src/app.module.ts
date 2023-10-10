@@ -1,12 +1,24 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+import { MongooseModule } from '@nestjs/mongoose';
+
+
 import { AuthModule } from './auth/auth.module';
-//OJO, EL CONFIGMODULE, CON EL MONGOOSE Y ESO EL PROF LO HIZO AQUI Y YO LO TENGO EN AUTH. YA HICE GIT  ADD  POR SI ACASO
 
 @Module({
   imports: [
+    ConfigModule.forRoot(),
+
+    MongooseModule.forRoot( process.env.MONGO_URI, {
+      dbName: process.env.MONGO_DB_NAME,
+    }),
+
     AuthModule,
+
   ],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {
-  constructor(){}
+
 }
